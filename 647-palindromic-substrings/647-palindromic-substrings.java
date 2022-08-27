@@ -1,5 +1,6 @@
 class Solution {
     public boolean check(boolean dp[][], int b, int e, String s){
+        if(dp[b][e]) return true;
         if(b<e==false) return true;
         if(s.charAt(b)!=s.charAt(e)) return dp[b][e]=false;
         return dp[b][e]=check(dp,b+1, e-1, s);
