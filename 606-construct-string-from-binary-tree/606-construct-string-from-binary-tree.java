@@ -18,14 +18,27 @@ class Solution {
         
 //     }
     public String tree2str(TreeNode root) {
-        if(root==null) return "";
-        
-        if(root.right==null && root.left==null) return root.val+"";
-        if(root.right==null) return root.val+"("+tree2str(root.left)+")";
-        
-       //f(root.left==null) return root.val+"()"+"("+tree2str(root.right)+")";
-        return root.val+"("+tree2str(root.left)+")"+"("+tree2str(root.right)+")";
-        
+       Stack<TreeNode> stack=new Stack<>();
+        Set<TreeNode> set=new HashSet<>();
+        stack.push(root);
+        String ans="";
+        while(!stack.isEmpty()){
+            TreeNode currnode=stack.peek();
+            if(set.contains(currnode)){
+                stack.pop();
+                ans=ans+")";
+            }
+            else{
+                
+                set.add(currnode);
+                ans=ans+"("+currnode.val;
+                if(currnode.left==null && currnode.right!=null) ans=ans+"()";
+                
+                if(currnode.right!=null) stack.push(currnode.right);
+                if(currnode.left!=null) stack.push(currnode.left);
+            }
+        }
+        return ans.substring(1, ans.length()-1);
         
     }
 }
